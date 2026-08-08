@@ -1,0 +1,43 @@
+---
+import { siteConfig } from "../data/config";
+import { getCategories } from "../lib/db.mjs";
+import SocialIcons from "./SocialIcons.astro";
+
+const categories = getCategories();
+---
+
+<header class="sticky top-0 z-10 bg-white/90 backdrop-blur border-b border-neutral-200">
+  <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between gap-4">
+    <a href="/" class="flex items-center gap-2.5">
+      <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-brand text-white font-bold text-sm">
+        {siteConfig.storeName.trim().charAt(0).toUpperCase()}
+      </span>
+      <span class="text-lg font-bold tracking-tight">{siteConfig.storeName}</span>
+    </a>
+    <SocialIcons />
+  </div>
+
+  <nav
+    class="no-scrollbar max-w-6xl mx-auto px-4 pb-3 flex flex-nowrap gap-2 overflow-x-auto"
+    aria-label="Categorías"
+  >
+    <button
+      type="button"
+      class="category-filter shrink-0 px-3.5 py-1.5 rounded-full text-sm font-medium border border-brand bg-brand text-white transition-colors"
+      data-category="all"
+    >
+      Todos
+    </button>
+    {
+      categories.map((category) => (
+        <button
+          type="button"
+          class="category-filter shrink-0 px-3.5 py-1.5 rounded-full text-sm font-medium border border-neutral-300 text-neutral-600 hover:border-brand hover:text-brand transition-colors"
+          data-category={category}
+        >
+          {category}
+        </button>
+      ))
+    }
+  </nav>
+</header>

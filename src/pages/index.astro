@@ -1,0 +1,52 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import ProductCard from "../components/ProductCard.astro";
+import { getAllProducts } from "../lib/db.mjs";
+
+const products = getAllProducts();
+---
+
+<Layout>
+  <Header />
+
+  <main class="flex-1 max-w-6xl w-full mx-auto px-4 py-10">
+    <div id="product-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+      {products.map((product) => <ProductCard product={product} />)}
+    </div>
+    <p id="empty-state" class="hidden text-center text-neutral-500 py-12">
+      No hay productos en esta categoría todavía.
+    </p>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  const filterButtons = document.querySelectorAll<HTMLButtonElement>(".category-filter");
+  const cards = document.querySelectorAll<HTMLElement>(".product-card");
+  const emptyState = document.getElementById("empty-state");
+
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const category = button.dataset.category;
+
+      filterButtons.forEach((b) => {
+        b.classList.remove("bg-brand", "text-white", "border-brand");
+        b.classList.add("border-neutral-300", "text-neutral-600");
+      });
+      button.classList.add("bg-brand", "text-white", "border-brand");
+      button.classList.remove("border-neutral-300", "text-neutral-600");
+
+      let visibleCount = 0;
+      cards.forEach((card) => {
+        const matches = category === "all" || card.dataset.category === category;
+        card.classList.toggle("hidden", !matches);
+        if (matches) visibleCount++;
+      });
+
+      emptyState?.classList.toggle("hidden", visibleCount !== 0);
+    });
+  });
+</script>
