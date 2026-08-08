@@ -10,7 +10,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "admin": "node admin/server.mjs"
+    "admin": "node admin/server.mjs",
+    "package:admin": "powershell -ExecutionPolicy Bypass -File scripts/build-portable-admin.ps1"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",

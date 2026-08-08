@@ -1,0 +1,24 @@
+CATALOGO - PANEL DE ADMINISTRACION
+===================================
+
+COMO USARLO
+-----------
+1. Doble clic en "Iniciar-Admin.bat".
+2. Se abren dos cosas: una ventana negra llamada "Servidor - NO CERRAR"
+   (ahi corre el programa, dejala abierta) y tu navegador con el panel.
+3. Ahi podes agregar, editar o borrar productos, con nombre, categoria,
+   precio, descripcion y foto.
+4. Cuando termines, cerra la ventana negra para apagar el servidor.
+
+No hace falta instalar Node.js ni nada mas en esta PC: ya viene todo
+incluido en la carpeta "node".
+
+COMO DEVOLVER LOS CAMBIOS
+--------------------------
+Cuando termines de cargar productos, comprimi en un .zip estas dos
+carpetas (estan al lado de este archivo):
+  - data
+  - public
+
+Y mandale ese .zip a la persona que te paso esto. Con eso puede
+actualizar el catalogo online.

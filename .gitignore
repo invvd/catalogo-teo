@@ -3,6 +3,10 @@ dist/
 
 # base de datos local del admin (no se versiona, es tu contenido)
 data/*.db
+
+# paquete portátil del admin para compartir (se regenera, no se versiona)
+.build/
+catalogo-admin-portable*.zip
 # generated types
 .astro/
 
