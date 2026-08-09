@@ -1,43 +1,71 @@
-# Astro Starter Kit: Minimal
+# Catálogo de ropa deportiva
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Sitio estático hecho con [Astro](https://astro.build) para mostrar un catálogo de
+productos con filtro por categoría y botón de "Consultar por WhatsApp" en cada
+card. Los productos se administran con un panel propio (SQLite + Express), no
+hay CMS ni backend externo.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+## Estructura
 
 ```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+src/
+├── components/     Header, Footer, ProductCard, SocialIcons
+├── data/config.ts  Nombre de la tienda, WhatsApp, redes sociales, developer
+├── lib/db.mjs      Acceso a SQLite (leído por el sitio y por el admin)
+└── pages/index.astro
+
+admin/server.mjs    Panel de administración (alta/edición/borrado de productos)
+data/catalog.db     Base SQLite (no se versiona, es tu contenido)
+public/products/    Fotos de los productos
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Primeros pasos
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+```bash
+npm install
+npm run dev
+```
 
-Any static assets, like images, can be placed in the `public/` directory.
+Abrí `http://localhost:4321`.
 
-## 🧞 Commands
+Antes de publicar, completá los datos reales en [src/data/config.ts](src/data/config.ts)
+(nombre de la tienda, número de WhatsApp, redes sociales, crédito del developer).
 
-All commands are run from the root of the project, from a terminal:
+## Comandos
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+| Comando                  | Qué hace                                                          |
+| ------------------------ | ------------------------------------------------------------------ |
+| `npm run dev`             | Sitio en modo desarrollo, `localhost:4321`                        |
+| `npm run build`           | Genera el sitio estático en `dist/` (lee los productos de SQLite) |
+| `npm run preview`         | Sirve `dist/` localmente para revisar el build                    |
+| `npm run admin`           | Panel de administración de productos, `localhost:4322`            |
+| `npm run package:admin`   | Genera un `.zip` portátil del admin (con Node incluido) para compartir |
 
-## 👀 Want to learn more?
+## Cargar productos
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+**En tu máquina:** `npm run admin` y abrís `http://localhost:4322`. Tabla con
+todos los productos, alta con foto por upload, edición y borrado.
+
+**En la máquina de otra persona sin Node instalado:** correr
+`npm run package:admin` genera `catalogo-admin-portable-win.zip` (Node
+embebido, no requiere instalar nada). Se lo pasás junto con las
+instrucciones de uso en [scripts/LEEME-admin-portable.txt](scripts/LEEME-admin-portable.txt)
+(se incluyen automáticamente dentro del zip como `LEEME.txt`). Esa persona
+después te devuelve las carpetas `data/` y `public/` con lo que cargó.
+
+⚠️ El admin **no tiene login**. Pensado para correr solo en una máquina local,
+nunca lo expongas públicamente en internet tal como está.
+
+## Publicar el sitio
+
+El sitio es 100% estático: los datos de SQLite se "hornean" en HTML recién al
+correr `npm run build`. Flujo:
+
+1. Cargar/actualizar productos (`npm run admin`, o recibir `data/` + `public/`
+   de quien los cargó).
+2. `npm run build`.
+3. Subir la carpeta `dist/` a Netlify, Vercel, GitHub Pages o el hosting que
+   uses.
+
+Guardá una copia de `data/catalog.db` de tanto en tanto — es la única fuente
+de verdad de tu catálogo y no se versiona en git.
