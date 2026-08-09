@@ -1,24 +1,71 @@
 CATALOGO - PANEL DE ADMINISTRACION
 ===================================
 
-COMO USARLO
------------
-1. Doble clic en "Iniciar-Admin.bat".
-2. Se abren dos cosas: una ventana negra llamada "Servidor - NO CERRAR"
-   (ahi corre el programa, dejala abierta) y tu navegador con el panel.
-3. Ahi podes agregar, editar o borrar productos, con nombre, categoria,
-   precio, descripcion y foto.
-4. Cuando termines, cerra la ventana negra para apagar el servidor.
+Esto te permite cargar los productos del catalogo (nombre, categoria,
+precio, descripcion y foto) sin instalar nada en tu computadora. Todo
+lo necesario ya viene incluido en esta carpeta.
 
-No hace falta instalar Node.js ni nada mas en esta PC: ya viene todo
-incluido en la carpeta "node".
+PASO 1: DESCOMPRIMIR
+---------------------
+Antes de descomprimir el .zip que te llego, hace esto (evita un aviso
+de Windows mas adelante):
+  1. Click derecho sobre el archivo .zip > Propiedades.
+  2. Si aparece una casilla que dice "Desbloquear" abajo de todo,
+     tildala y aclara en "Aceptar".
+  3. Ahora si, descomprimi el .zip donde quieras (Escritorio, Documentos, etc).
 
-COMO DEVOLVER LOS CAMBIOS
+PASO 2: ABRIR EL PANEL
+-----------------------
+1. Entra a la carpeta que se descomprimio y hace doble clic en
+   "Iniciar-Admin.bat".
+2. Es MUY PROBABLE que Windows muestre un cartel azul que dice
+   "Windows protegio su PC". Es normal, pasa porque el programa no
+   tiene una firma paga, no porque sea peligroso. Para continuar:
+     - Click en "Mas informacion".
+     - Click en "Ejecutar de todas formas".
+3. Si Windows te pide permiso de "Firewall" para "node.exe", elegi
+   "Permitir acceso" (lo necesita para que el navegador se conecte
+   al panel).
+4. Se van a abrir dos cosas:
+     - Una ventana negra llamada "Servidor - NO CERRAR": ahi corre
+       el programa. Dejala abierta todo el tiempo que estes usando
+       el panel.
+     - Tu navegador, con la lista de productos.
+
+PASO 3: CARGAR PRODUCTOS
 --------------------------
-Cuando termines de cargar productos, comprimi en un .zip estas dos
-carpetas (estan al lado de este archivo):
-  - data
-  - public
+- Para agregar uno: boton "+ Agregar producto" arriba a la derecha.
+  Completa nombre, categoria, precio (opcional) y descripcion
+  (opcional), elegi una foto con "Elegir archivo" y guarda.
+- Para editar uno: boton "Editar" en su fila. Si no elegis una foto
+  nueva, se mantiene la que ya tenia.
+- Para borrarlo: boton "Eliminar" en su fila (te va a pedir
+  confirmacion, no se puede deshacer).
+- Podes cerrar el navegador y volver a entrar a http://localhost:4322
+  en cualquier momento mientras la ventana negra siga abierta: los
+  productos quedan guardados, no se pierden.
 
-Y mandale ese .zip a la persona que te paso esto. Con eso puede
-actualizar el catalogo online.
+PASO 4: TERMINAR
+-----------------
+Cuando termines de cargar productos, cerra la ventana negra
+"Servidor - NO CERRAR" (con eso se apaga el programa). No hace falta
+hacer nada mas para "guardar", todo se guarda solo a medida que
+cargas cada producto.
+
+PASO 5: DEVOLVER LOS CAMBIOS
+------------------------------
+Dentro de esta misma carpeta vas a ver dos carpetas: "data" y
+"public". Comprimilas juntas en un .zip y mandaselo a la persona que
+te paso este programa. Ahi tiene tus productos y las fotos que
+subiste.
+
+SI ALGO NO FUNCIONA
+---------------------
+- Nada se conecta a internet ni sube fotos a ningun lado: todo queda
+  en tu computadora hasta que mandes el .zip del paso 5.
+- Si cerraste todo por error, volve a hacer doble clic en
+  "Iniciar-Admin.bat": tus productos van a seguir ahi.
+- Si el navegador no abrio solo, entra a mano a esta direccion:
+  http://localhost:4322
+- Si algo se traba, cerra la ventana negra y volve a abrir
+  "Iniciar-Admin.bat".
